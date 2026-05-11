@@ -1,0 +1,151 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  controllerName="zimele.certtracker.controller.EmployeeDetail"
+  displayBlock="true">
+
+  <Page id="empDetailPage" title="{state>/fullName}" showNavButton="true"
+        navButtonPress="onNavBack" backgroundDesign="List">
+
+    <headerContent>
+      <Button text="Add Certification" type="Emphasized" press="onAddCertification"
+              icon="sap-icon://add"/>
+    </headerContent>
+
+    <content>
+      <VBox class="sapUiMediumMargin">
+
+        <!-- Employee Profile Card -->
+        <Panel expandable="false" class="sapUiSmallMarginBottom">
+          <content>
+            <HBox alignItems="Center" class="sapUiMediumMargin">
+              <Avatar initials="{state>/initials}" size="L" backgroundColor="Accent5"
+                      class="sapUiMediumMarginEnd"/>
+              <VBox>
+                <Title text="{state>/fullName}" level="H3"/>
+                <Label text="{state>/role}"/>
+                <HBox class="sapUiTinyMarginTop" wrap="Wrap">
+                  <ObjectAttribute title="Department" text="{state>/department}" class="sapUiSmallMarginEnd"/>
+                  <ObjectAttribute title="Email" text="{state>/email}" class="sapUiSmallMarginEnd"/>
+                  <ObjectAttribute title="Manager" text="{state>/manager}" class="sapUiSmallMarginEnd"/>
+                  <ObjectAttribute title="Employee ID" text="{state>/employeeId}"/>
+                </HBox>
+              </VBox>
+            </HBox>
+          </content>
+        </Panel>
+
+        <!-- Tabs -->
+        <IconTabBar id="detailTabs" expandable="false">
+
+          <!-- Certifications Tab -->
+          <items>
+            <IconTabFilter text="Certifications" icon="sap-icon://certificate"
+                           id="tabCerts" count="{state>/certCount}">
+              <content>
+                <Table id="empCertTable"
+                       items="{state>/certifications}"
+                       noDataText="No certifications recorded">
+                  <columns>
+                    <Column><Text text="Certification"/></Column>
+                    <Column width="80px"><Text text="Module"/></Column>
+                    <Column width="110px"><Text text="Issue Date"/></Column>
+                    <Column width="110px"><Text text="Expiry Date"/></Column>
+                    <Column hAlign="Center" width="110px"><Text text="Status"/></Column>
+                    <Column width="150px"><Text text="Verified By"/></Column>
+                  </columns>
+                  <items>
+                    <ColumnListItem>
+                      <cells>
+                        <Text text="{state>certName}" wrapping="false"/>
+                        <ObjectStatus text="{state>certModule}"/>
+                        <Text text="{state>issueDate}" wrapping="false"/>
+                        <Text text="{state>expiryDate}" wrapping="false"/>
+                        <ObjectStatus
+                          text="{state>status}"
+                          state="{path: 'state>status', formatter: '.statusToState'}"/>
+                        <Text text="{state>verifiedBy}" wrapping="false"/>
+                      </cells>
+                    </ColumnListItem>
+                  </items>
+                </Table>
+              </content>
+            </IconTabFilter>
+
+            <!-- Learning Progress Tab -->
+            <IconTabFilter text="Learning Progress" icon="sap-icon://learning-assistant"
+                           id="tabLearning">
+              <content>
+                <Table id="learningTable"
+                       items="{
+                         path: '/LearningProgress',
+                         filters: [{path: 'employee_ID', operator: 'EQ', value1: '{state>/id}'}]
+                       }"
+                       noDataText="No learning progress recorded">
+                  <columns>
+                    <Column><Text text="Course"/></Column>
+                    <Column width="120px"><Text text="Provider"/></Column>
+                    <Column width="100px"><Text text="Module Area"/></Column>
+                    <Column width="110px"><Text text="Start Date"/></Column>
+                    <Column width="110px"><Text text="Completion"/></Column>
+                    <Column hAlign="Center" width="120px"><Text text="Status"/></Column>
+                    <Column hAlign="End" width="80px"><Text text="Hours"/></Column>
+                  </columns>
+                  <items>
+                    <ColumnListItem>
+                      <cells>
+                        <Text text="{courseName}" wrapping="false"/>
+                        <Text text="{courseProvider}" wrapping="false"/>
+                        <Text text="{moduleArea}" wrapping="false"/>
+                        <Text text="{startDate}" wrapping="false"/>
+                        <Text text="{completionDate}" wrapping="false"/>
+                        <ObjectStatus text="{status}"
+                          state="{path: 'status', formatter: '.learningStatusToState'}"/>
+                        <ObjectNumber number="{hoursSpent}" unit="h"/>
+                      </cells>
+                    </ColumnListItem>
+                  </items>
+                </Table>
+              </content>
+            </IconTabFilter>
+
+            <!-- Recommended Tab -->
+            <IconTabFilter text="Recommended" icon="sap-icon://hint" id="tabRecommended">
+              <content>
+                <Table id="recommendedTable"
+                       items="{state>/recommended}"
+                       noDataText="All catalog certifications are already held">
+                  <columns>
+                    <Column><Text text="Certification"/></Column>
+                    <Column width="80px"><Text text="Module"/></Column>
+                    <Column hAlign="End" width="100px"><Text text="Exam Cost (USD)"/></Column>
+                    <Column hAlign="Center" width="100px"><Text text="Prep (weeks)"/></Column>
+                    <Column><Text text="Description"/></Column>
+                  </columns>
+                  <items>
+                    <ColumnListItem>
+                      <cells>
+                        <VBox>
+                          <Text text="{state>certName}" wrapping="false"/>
+                          <Label text="{state>certCode}" wrapping="false"/>
+                        </VBox>
+                        <ObjectStatus text="{state>certModule}"/>
+                        <ObjectNumber number="{state>examCost}" unit="USD"/>
+                        <ObjectNumber number="{state>prepTimeWeeks}" unit="wk"/>
+                        <Text text="{state>description}" maxLines="2"/>
+                      </cells>
+                    </ColumnListItem>
+                  </items>
+                </Table>
+              </content>
+            </IconTabFilter>
+
+          </items>
+        </IconTabBar>
+
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

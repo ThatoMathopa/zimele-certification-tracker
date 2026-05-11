@@ -1,0 +1,8 @@
+node_modules/
+gen/
+mta_archives/
+.env
+*.db
+*.sqlite
+default-env.json
+.cds-models/

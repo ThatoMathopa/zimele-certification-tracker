@@ -1,0 +1,67 @@
+_schema-version: "3.3.0"
+ID: zimele-certification-tracker
+description: Zimele Technologies SAP Certification Tracker
+version: 1.0.0
+
+modules:
+  # ── CAP Backend ──────────────────────────────────────────────────────────────
+  - name: cert-tracker-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 256M
+      disk-quota: 512M
+    build-parameters:
+      builder: npm
+    properties:
+      EXIT: 1
+    requires:
+      - name: cert-tracker-db
+        properties:
+          hdbtabledata-source: true
+    provides:
+      - name: cert-tracker-srv-api
+        properties:
+          srv-url: ${default-url}
+
+  # ── HANA DB Deployer ─────────────────────────────────────────────────────────
+  - name: cert-tracker-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 256M
+    requires:
+      - name: cert-tracker-db
+
+  # ── Approuter ────────────────────────────────────────────────────────────────
+  - name: cert-tracker-approuter
+    type: approuter.nodejs
+    path: app/router
+    parameters:
+      memory: 128M
+      disk-quota: 256M
+    requires:
+      - name: cert-tracker-srv-api
+        group: destinations
+        properties:
+          name: cert-tracker-srv-api
+          url: ~{srv-url}
+          forwardAuthToken: false
+
+resources:
+  # ── SAP HANA HDI Container ───────────────────────────────────────────────────
+  - name: cert-tracker-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+    properties:
+      hdi-service-name: ${service-name}
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx cds build --production

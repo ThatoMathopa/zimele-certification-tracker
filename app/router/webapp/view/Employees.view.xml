@@ -1,0 +1,68 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  controllerName="zimele.certtracker.controller.Employees"
+  displayBlock="true">
+
+  <Page title="Employees" showNavButton="true" navButtonPress="onNavBack"
+        backgroundDesign="List">
+
+    <subHeader>
+      <Bar>
+        <contentLeft>
+          <SearchField id="empSearch" width="300px" placeholder="Search employees..."
+                       liveChange="onSearch"/>
+        </contentLeft>
+        <contentRight>
+          <Button text="Add Certification" type="Emphasized" press="onAddCertification"
+                  icon="sap-icon://add"/>
+        </contentRight>
+      </Bar>
+    </subHeader>
+
+    <content>
+      <VBox class="sapUiMediumMargin">
+        <Table id="empTable"
+               items="{
+                 path: '/Employees',
+                 parameters: {
+                   $expand: 'certifications',
+                   $orderby: 'firstName asc'
+                 }
+               }"
+               growing="true"
+               growingThreshold="20"
+               noDataText="No employees found">
+
+          <columns>
+            <Column width="100px"><Text text="Employee ID"/></Column>
+            <Column><Text text="Name"/></Column>
+            <Column><Text text="Role"/></Column>
+            <Column><Text text="Department"/></Column>
+            <Column hAlign="Center" width="100px"><Text text="Active Certs"/></Column>
+            <Column hAlign="Center" width="90px"><Text text="Expired"/></Column>
+            <Column hAlign="Center" width="80px"><Text text="Status"/></Column>
+          </columns>
+
+          <items>
+            <ColumnListItem type="Navigation" press="onSelectEmployee">
+              <cells>
+                <Text text="{employeeId}"/>
+                <VBox>
+                  <Text text="{firstName} {lastName}" wrapping="false"/>
+                  <Label text="{email}" wrapping="false"/>
+                </VBox>
+                <Text text="{role}" wrapping="false"/>
+                <Text text="{department}" wrapping="false"/>
+                <ObjectNumber number="{path: 'certifications', formatter: '.countActive'}" state="Success"/>
+                <ObjectNumber number="{path: 'certifications', formatter: '.countExpired'}" state="Error"/>
+                <ObjectStatus icon="{path: 'certifications', formatter: '.statusIcon'}"
+                              state="{path: 'certifications', formatter: '.statusState'}"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

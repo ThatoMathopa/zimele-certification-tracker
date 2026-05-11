@@ -1,0 +1,105 @@
+{
+  "_version": "1.58.0",
+  "sap.app": {
+    "id": "zimele.certtracker",
+    "type": "application",
+    "title": "Zimele Certification Tracker",
+    "description": "SAP Certification and Skills Management for Zimele Technologies",
+    "applicationVersion": { "version": "1.0.0" },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/cert/",
+        "type": "OData",
+        "settings": { "odataVersion": "4.0" }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": { "icon": "sap-icon://learning-assistant" },
+    "deviceTypes": { "desktop": true, "tablet": true, "phone": true }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "zimele.certtracker.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {},
+        "sap.f": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {},
+        "sap.suite.ui.microchart": {}
+      }
+    },
+    "contentDensities": { "compact": true, "cozy": true },
+    "models": {
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true
+        }
+      },
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "zimele.certtracker.i18n.i18n",
+          "supportedLocales": ["", "en", "en_ZA"],
+          "fallbackLocale": ""
+        }
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "JSON",
+        "viewType": "XML",
+        "path": "zimele.certtracker.view",
+        "controlId": "appNav",
+        "controlAggregation": "pages",
+        "async": true
+      },
+      "routes": [
+        { "pattern": "", "name": "Dashboard", "target": "Dashboard" },
+        { "pattern": "employees", "name": "Employees", "target": "Employees" },
+        { "pattern": "employees/{id}", "name": "EmployeeDetail", "target": "EmployeeDetail" },
+        { "pattern": "certifications", "name": "Certifications", "target": "Certifications" },
+        { "pattern": "certifications/add", "name": "AddCertification", "target": "AddCertification" }
+      ],
+      "targets": {
+        "Dashboard": {
+          "id": "Dashboard",
+          "name": "Dashboard",
+          "viewLevel": 1
+        },
+        "Employees": {
+          "id": "Employees",
+          "name": "Employees",
+          "viewLevel": 2
+        },
+        "EmployeeDetail": {
+          "id": "EmployeeDetail",
+          "name": "EmployeeDetail",
+          "viewLevel": 3
+        },
+        "Certifications": {
+          "id": "Certifications",
+          "name": "Certifications",
+          "viewLevel": 2
+        },
+        "AddCertification": {
+          "id": "AddCertification",
+          "name": "AddCertification",
+          "viewLevel": 3
+        }
+      }
+    }
+  }
+}

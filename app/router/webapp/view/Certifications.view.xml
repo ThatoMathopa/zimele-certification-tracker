@@ -1,0 +1,94 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  controllerName="zimele.certtracker.controller.Certifications"
+  displayBlock="true">
+
+  <Page title="All Certifications" showNavButton="true" navButtonPress="onNavBack"
+        backgroundDesign="List">
+
+    <subHeader>
+      <Bar>
+        <contentLeft>
+          <SearchField id="certSearch" width="250px" placeholder="Search certifications..."
+                       liveChange="onSearch"/>
+          <Select id="statusFilter" change="onStatusFilterChange" class="sapUiTinyMarginBegin">
+            <items>
+              <Item key="" text="All Statuses"/>
+              <Item key="ACTIVE" text="Active"/>
+              <Item key="EXPIRING_SOON" text="Expiring Soon"/>
+              <Item key="EXPIRED" text="Expired"/>
+            </items>
+          </Select>
+          <Select id="moduleFilter" change="onModuleFilterChange" class="sapUiTinyMarginBegin">
+            <items>
+              <Item key="" text="All Modules"/>
+              <Item key="BTP" text="BTP"/>
+              <Item key="CPI" text="CPI"/>
+              <Item key="S/4HANA" text="S/4HANA"/>
+              <Item key="SC2" text="SC2"/>
+              <Item key="ANALYTICS" text="Analytics"/>
+              <Item key="BASIS" text="BASIS"/>
+              <Item key="AI" text="AI"/>
+              <Item key="PM" text="PM"/>
+              <Item key="HCM" text="HCM"/>
+            </items>
+          </Select>
+        </contentLeft>
+        <contentRight>
+          <Button text="Add Certification" type="Emphasized" press="onAddCertification"
+                  icon="sap-icon://add"/>
+        </contentRight>
+      </Bar>
+    </subHeader>
+
+    <content>
+      <VBox class="sapUiMediumMargin">
+        <Table id="certTable"
+               items="{
+                 path: '/Certifications',
+                 parameters: {
+                   $expand: 'employee',
+                   $orderby: 'expiryDate asc'
+                 }
+               }"
+               growing="true"
+               growingThreshold="25"
+               noDataText="No certifications found">
+
+          <columns>
+            <Column><Text text="Certification"/></Column>
+            <Column width="90px"><Text text="Module"/></Column>
+            <Column><Text text="Employee"/></Column>
+            <Column width="110px"><Text text="Issue Date"/></Column>
+            <Column width="110px"><Text text="Expiry Date"/></Column>
+            <Column hAlign="Center" width="130px"><Text text="Status"/></Column>
+            <Column width="130px"><Text text="Verified By"/></Column>
+          </columns>
+
+          <items>
+            <ColumnListItem type="Active" press="onSelectCert">
+              <cells>
+                <VBox>
+                  <Text text="{certName}" wrapping="false"/>
+                  <Label text="{certCode}" wrapping="false"/>
+                </VBox>
+                <ObjectStatus text="{certModule}"/>
+                <VBox>
+                  <Text text="{employee/firstName} {employee/lastName}" wrapping="false"/>
+                  <Label text="{employee/role}" wrapping="false"/>
+                </VBox>
+                <Text text="{issueDate}" wrapping="false"/>
+                <Text text="{expiryDate}" wrapping="false"/>
+                <ObjectStatus
+                  text="{status}"
+                  state="{path: 'status', formatter: '.statusToState'}"/>
+                <Text text="{verifiedBy}" wrapping="false"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

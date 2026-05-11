@@ -1,0 +1,9 @@
+ID;employeeId;firstName;lastName;email;role;department;manager;joinDate;isActive
+1;ZIM-001;Thato;Mathopa;thato@zimele.co.za;Managing Director;Leadership;;2020-01-15;true
+2;ZIM-002;Sipho;Ndaba;sipho@zimele.co.za;Senior SAP BTP Developer;BTP Development;Thato Mathopa;2021-03-01;true
+3;ZIM-003;Lerato;Mokone;lerato@zimele.co.za;SAP Integration Consultant;Integration;Thato Mathopa;2021-06-15;true
+4;ZIM-004;Dineo;Stuurman;dineo@zimele.co.za;SAP Service Cloud Consultant;CX Solutions;Thato Mathopa;2022-01-10;true
+5;ZIM-005;Kagiso;Molefe;kagiso@zimele.co.za;SAP S/4HANA Consultant;ERP;Thato Mathopa;2022-04-01;true
+6;ZIM-006;Naledi;Tau;naledi@zimele.co.za;Junior BTP Developer;BTP Development;Sipho Ndaba;2023-08-01;true
+7;ZIM-007;Tshepo;Khumalo;tshepo@zimele.co.za;SAP Analytics Consultant;Analytics;Thato Mathopa;2023-02-15;true
+8;ZIM-008;Mpho;Baloyi;mpho@zimele.co.za;SAP Basis Administrator;Infrastructure;Thato Mathopa;2021-09-01;true

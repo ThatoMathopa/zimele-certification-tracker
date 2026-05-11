@@ -1,0 +1,11 @@
+ID;certCode;certName;certModule;examDuration;passingScore;examCost;validityMonths;isActive;description;prepTimeWeeks
+1;C_BTPADM_2025;SAP Certified - Solution Architect - SAP BTP;BTP;180;65;562;12;true;Validates expertise in designing solutions on SAP BTP;12
+2;C_CPI_2506;SAP Certified - Integration Developer - SAP CPI;CPI;180;63;562;12;true;Validates skills in SAP Cloud Integration and Integration Suite;10
+3;C_TS4FI_2023;SAP Certified - Associate - SAP S/4HANA Finance;S/4HANA;180;63;562;12;true;Financial accounting and controlling in S/4HANA;8
+4;C_TS4CO_2023;SAP Certified - Associate - SAP S/4HANA Controlling;S/4HANA;180;60;562;12;true;Management accounting in S/4HANA;8
+5;C_TADM_2022;SAP Certified Technology Associate - System Admin S/4HANA;BASIS;180;60;562;12;true;System administration and landscape management;10
+6;C_C4H510_2023;SAP Certified - SAP Service Cloud;SC2;180;65;562;12;true;Service Cloud V2 configuration and customisation;8
+7;C_SAC_2308;SAP Certified - SAP Analytics Cloud;ANALYTICS;180;63;562;12;true;Planning, analytics, and predictive capabilities;8
+8;C_HCMPAY_2023;SAP Certified - SAP SuccessFactors Payroll;HCM;180;63;562;12;true;SuccessFactors Employee Central Payroll;10
+9;C_ACTIVATE_2022;SAP Certified - SAP Activate Project Manager;PM;180;63;562;12;true;SAP Activate methodology for project management;6
+10;C_GENAIBAS_2025;SAP Certified - Generative AI Developer;AI;120;65;562;12;true;Building AI solutions with SAP Business AI and Joule;8

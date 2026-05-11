@@ -1,0 +1,129 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.f"
+  controllerName="zimele.certtracker.controller.Dashboard"
+  displayBlock="true">
+
+  <Page id="dashPage" showHeader="false" enableScrolling="true" backgroundDesign="List">
+
+    <content>
+      <!-- Zimele Header -->
+      <VBox class="zimeleHeader">
+        <HBox alignItems="Center" justifyContent="SpaceBetween">
+          <HBox alignItems="Center">
+            <HBox class="zimeleLogoIcon" width="48px" height="48px" justifyContent="Center" alignItems="Center">
+              <core:Icon xmlns:core="sap.ui.core" src="sap-icon://learning-assistant" size="1.6rem" color="white"/>
+            </HBox>
+            <VBox class="sapUiSmallMarginBegin">
+              <Title text="Certification Tracker" level="H2" titleStyle="H3" wrapping="false"/>
+              <Label text="Zimele Technologies — SAP Skills Management"/>
+            </VBox>
+          </HBox>
+          <HBox>
+            <Button text="Add Certification" type="Emphasized" press="onAddCertification" icon="sap-icon://add"/>
+            <Button text="All Employees" press="onNavToEmployees" icon="sap-icon://group" class="sapUiTinyMarginBegin"/>
+          </HBox>
+        </HBox>
+      </VBox>
+
+      <!-- Gradient accent bar -->
+      <HTML content="&lt;div class='zimeleAccentBar'&gt;&lt;/div&gt;"/>
+
+      <VBox class="sapUiMediumMargin">
+
+        <!-- KPI Row -->
+        <Panel headerText="Overview" expandable="false">
+          <content>
+            <HBox class="kpiRow" wrap="Wrap">
+              <VBox class="kpiCard" id="kpiEmployees">
+                <Text text="{state>/totalEmployees}" class="kpiValue"/>
+                <Text text="Total Employees" class="kpiLabel"/>
+              </VBox>
+              <VBox class="kpiCard green" id="kpiActive">
+                <Text text="{state>/activeCerts}" class="kpiValue"/>
+                <Text text="Active Certifications" class="kpiLabel"/>
+              </VBox>
+              <VBox class="kpiCard gold" id="kpiExpiring">
+                <Text text="{state>/expiringSoonCerts}" class="kpiValue"/>
+                <Text text="Expiring Soon" class="kpiLabel"/>
+              </VBox>
+              <VBox class="kpiCard red" id="kpiExpired">
+                <Text text="{state>/expiredCerts}" class="kpiValue"/>
+                <Text text="Expired" class="kpiLabel"/>
+              </VBox>
+              <VBox class="kpiCard blue" id="kpiCoverage">
+                <Text text="{path: 'state>/coveragePercent', formatter: '.formatPercent'}" class="kpiValue"/>
+                <Text text="Team Coverage" class="kpiLabel"/>
+              </VBox>
+              <VBox class="kpiCard" id="kpiInvestment">
+                <Text text="{path: 'state>/totalInvestment', formatter: '.formatCurrency'}" class="kpiValue" wrapping="false"/>
+                <Text text="Total Investment (ZAR)" class="kpiLabel"/>
+              </VBox>
+            </HBox>
+          </content>
+        </Panel>
+
+        <HBox wrap="Wrap" class="sapUiSmallMarginTop" alignItems="Stretch">
+
+          <!-- Skills Coverage -->
+          <Panel headerText="Skills Coverage by Module" expandable="false" width="55%" class="sapUiSmallMarginEnd" id="coveragePanel">
+            <content>
+              <List id="coverageList" noDataText="Loading coverage data..." items="{state>/skillsCoverage}">
+                <items>
+                  <CustomListItem>
+                    <content>
+                      <VBox class="sapUiSmallMargin">
+                        <HBox justifyContent="SpaceBetween" alignItems="Center">
+                          <Text text="{state>moduleArea}" class="sapMText" wrapping="false"/>
+                          <HBox alignItems="Center">
+                            <Text text="{state>certifiedCount}" class="sapMText sapUiTinyMarginEnd" wrapping="false"/>
+                            <Text text="/" class="sapMText sapUiTinyMarginEnd" wrapping="false"/>
+                            <Text text="{state>totalEmployees}" class="sapMText" wrapping="false"/>
+                            <Text text=" " class="sapMText" wrapping="false"/>
+                            <ObjectStatus
+                              text="{path: 'state>coveragePercent', formatter: '.formatPercent'}"
+                              state="{path: 'state>coveragePercent', formatter: '.formatCoverageState'}"/>
+                          </HBox>
+                        </HBox>
+                        <HTML content="{path: 'state>coveragePercent', formatter: '.formatCoverageBar'}"/>
+                      </VBox>
+                    </content>
+                  </CustomListItem>
+                </items>
+              </List>
+            </content>
+          </Panel>
+
+          <!-- Expiry Alerts -->
+          <Panel headerText="Expiry Alerts (Next 60 Days)" expandable="false" width="43%" id="alertsPanel">
+            <content>
+              <List id="alertsList" noDataText="No upcoming expiry alerts" items="{state>/expiryAlerts}">
+                <items>
+                  <CustomListItem>
+                    <content>
+                      <VBox class="sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom">
+                        <HBox justifyContent="SpaceBetween" alignItems="Center">
+                          <VBox>
+                            <Text text="{state>employeeName}" class="sapMText" wrapping="false"/>
+                            <Label text="{state>certName}" wrapping="false"/>
+                          </VBox>
+                          <ObjectStatus
+                            text="{state>daysRemaining} days"
+                            state="{path: 'state>daysRemaining', formatter: '.formatAlertState'}"/>
+                        </HBox>
+                      </VBox>
+                    </content>
+                  </CustomListItem>
+                </items>
+              </List>
+            </content>
+          </Panel>
+
+        </HBox>
+
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

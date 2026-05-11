@@ -1,0 +1,11 @@
+ID;employee_ID;certCode;certName;certModule;issueDate;expiryDate;status;verifiedBy;verifiedOn;renewalCost;notes
+1;2;C_BTPADM_2025;SAP Certified - Solution Architect - SAP BTP;BTP;2025-06-15;2026-06-15;ACTIVE;Thato Mathopa;2025-06-20;562;Passed first attempt
+2;2;C_CPI_2506;SAP Certified - Integration Developer - SAP CPI;CPI;2025-09-10;2026-09-10;ACTIVE;Thato Mathopa;2025-09-15;562;
+3;3;C_CPI_2506;SAP Certified - Integration Developer - SAP CPI;CPI;2025-03-20;2026-03-20;EXPIRING_SOON;Thato Mathopa;2025-03-25;562;Renewal needed by March 2026
+4;4;C_C4H510_2023;SAP Certified - SAP Service Cloud;SC2;2025-01-10;2026-01-10;EXPIRED;Thato Mathopa;2025-01-15;562;Expired - needs renewal
+5;5;C_TS4FI_2023;SAP Certified - SAP S/4HANA Finance;S/4HANA;2025-08-01;2026-08-01;ACTIVE;Thato Mathopa;2025-08-05;562;
+6;6;C_BTPADM_2025;SAP Certified - Solution Architect - SAP BTP;BTP;2024-11-20;2025-11-20;EXPIRED;;562;Junior dev - expired cert
+7;7;C_SAC_2308;SAP Certified - SAP Analytics Cloud;ANALYTICS;2025-11-01;2026-11-01;ACTIVE;Thato Mathopa;2025-11-05;562;
+8;8;C_TADM_2022;SAP Certified Technology Associate - System Admin;BASIS;2025-04-15;2026-04-15;EXPIRING_SOON;Thato Mathopa;2025-04-20;562;
+9;1;C_ACTIVATE_2022;SAP Certified - SAP Activate Project Manager;PM;2025-07-01;2026-07-01;ACTIVE;Self;2025-07-01;562;
+10;5;C_TS4CO_2023;SAP Certified - SAP S/4HANA Controlling;S/4HANA;2025-05-10;2026-05-10;ACTIVE;Thato Mathopa;2025-05-15;562;
